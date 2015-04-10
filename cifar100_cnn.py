@@ -19,7 +19,7 @@ from keras.utils import np_utils, generic_utils
 
 batch_size = 1024
 nb_classes = 11
-nb_epoch = 250
+nb_epoch = 100
 data_augmentation = True
 
 # the data, shuffled and split between tran and test sets
@@ -44,17 +44,19 @@ model = Sequential()
 
 model.add(Convolution2D(32, 3, 3, 3, border_mode='full'))
 model.add(Activation('relu'))
+model.add(Dropout(0.8))
 model.add(Convolution2D(32, 32, 3, 3))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(poolsize=(2, 2)))
-model.add(Dropout(0.5))
+model.add(Dropout(0.75))
 
 model.add(Convolution2D(64, 32, 3, 3, border_mode='full'))
 model.add(Activation('relu'))
+model.add(Dropout(0.7))
 model.add(Convolution2D(64, 64, 3, 3))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(poolsize=(2, 2)))
-model.add(Dropout(0.5))
+model.add(Dropout(0.6))
 
 model.add(Flatten(64*8*8))
 model.add(Dense(64*8*8, 512, init='normal'))
@@ -90,8 +92,8 @@ else:
         samplewise_std_normalization=False, # divide each input by its std
         zca_whitening=False, # apply ZCA whitening
         rotation_range=20, # randomly rotate images in the range (degrees, 0 to 180)
-        width_shift_range=0.2, # randomly shift images horizontally (fraction of total width)
-        height_shift_range=0.2, # randomly shift images vertically (fraction of total height)
+        width_shift_range=0.3, # randomly shift images horizontally (fraction of total width)
+        height_shift_range=0.3, # randomly shift images vertically (fraction of total height)
         horizontal_flip=True, # randomly flip images
         vertical_flip=False) # randomly flip images
 
