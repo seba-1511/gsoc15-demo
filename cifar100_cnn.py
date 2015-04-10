@@ -23,7 +23,7 @@ nb_epoch = 100
 data_augmentation = True
 
 # the data, shuffled and split between tran and test sets
-(X_train, y_train), (X_test, y_test) = cifar100.load_data(test_split=0.15)
+(X_train, y_train), (X_test, y_test) = cifar100.load_data(test_split=0.125)
 print X_train.shape[0], 'train samples'
 print X_test.shape[0], 'test samples'
 
