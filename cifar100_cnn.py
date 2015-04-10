@@ -1,9 +1,10 @@
+import numpy as np
 from keras.datasets import cifar100
 from keras.preprocessing.image import ImageDataGenerator
 from keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation, Flatten
 from keras.layers.convolutional import Convolution2D, MaxPooling2D
-from keras.optimizers import SGD, Adadelta, Adagrad
+from keras.optimizers import SGD
 from keras.utils import np_utils, generic_utils
 
 '''
@@ -16,15 +17,24 @@ from keras.utils import np_utils, generic_utils
     (it's still underfitting at that point, though).
 '''
 
-batch_size = 256
-nb_classes = 100
-nb_epoch = 25
+batch_size = 1024
+nb_classes = 10
+nb_epoch = 250
 data_augmentation = True
 
 # the data, shuffled and split between tran and test sets
 (X_train, y_train), (X_test, y_test) = cifar100.load_data(test_split=0.1)
 print X_train.shape[0], 'train samples'
 print X_test.shape[0], 'test samples'
+
+train_idx = np.where(y_train <= 10)[0]
+test_idx = np.where(y_test <= 10)[0]
+
+X_train = np.array([X_train[i] for i in train_idx])
+y_train  = np.array([y_train[i] for i in train_idx])
+X_test = np.array([X_test[i] for i in test_idx])
+y_test = np.array([y_test[i] for i in test_idx])
+
 
 # convert class vectors to binary class matrices
 Y_train = np_utils.to_categorical(y_train, nb_classes)
@@ -37,14 +47,14 @@ model.add(Activation('relu'))
 model.add(Convolution2D(32, 32, 3, 3))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(poolsize=(2, 2)))
-model.add(Dropout(0.25))
+model.add(Dropout(0.5))
 
 model.add(Convolution2D(64, 32, 3, 3, border_mode='full'))
 model.add(Activation('relu'))
 model.add(Convolution2D(64, 64, 3, 3))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(poolsize=(2, 2)))
-model.add(Dropout(0.25))
+model.add(Dropout(0.5))
 
 model.add(Flatten(64*8*8))
 model.add(Dense(64*8*8, 512, init='normal'))
