@@ -19,13 +19,11 @@ from keras.utils import np_utils, generic_utils
 
 batch_size = 1024
 nb_classes = 11
-nb_epoch = 100
+nb_epoch = 250
 data_augmentation = True
 
 # the data, shuffled and split between tran and test sets
-(X_train, y_train), (X_test, y_test) = cifar100.load_data(test_split=0.125)
-print X_train.shape[0], 'train samples'
-print X_test.shape[0], 'test samples'
+(X_train, y_train), (X_test, y_test) = cifar100.load_data(test_split=0.15)
 
 train_idx = np.where(y_train <= 10)[0]
 test_idx = np.where(y_test <= 10)[0]
@@ -34,6 +32,9 @@ X_train = np.array([X_train[i] for i in train_idx])
 y_train  = np.array([y_train[i] for i in train_idx])
 X_test = np.array([X_test[i] for i in test_idx])
 y_test = np.array([y_test[i] for i in test_idx])
+
+print X_train.shape[0], 'train samples'
+print X_test.shape[0], 'test samples'
 
 
 # convert class vectors to binary class matrices
