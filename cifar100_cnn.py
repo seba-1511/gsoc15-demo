@@ -18,12 +18,12 @@ from keras.utils import np_utils, generic_utils
 '''
 
 batch_size = 1024
-nb_classes = 10
+nb_classes = 11
 nb_epoch = 250
 data_augmentation = True
 
 # the data, shuffled and split between tran and test sets
-(X_train, y_train), (X_test, y_test) = cifar100.load_data(test_split=0.1)
+(X_train, y_train), (X_test, y_test) = cifar100.load_data(test_split=0.15)
 print X_train.shape[0], 'train samples'
 print X_test.shape[0], 'test samples'
 
