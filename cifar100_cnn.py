@@ -19,7 +19,7 @@ from keras.utils import np_utils, generic_utils
 
 batch_size = 1024
 nb_classes = 11
-nb_epoch = 250
+nb_epoch = 100
 data_augmentation = True
 
 # the data, shuffled and split between tran and test sets
