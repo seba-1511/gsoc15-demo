@@ -39,8 +39,8 @@ for ds_idx in xrange(10):
     print X_train.shape[0], 'train samples'
     print X_test.shape[0], 'test samples'
 
-    y_train -= 90
-    y_test -= 90
+    y_train -= ds_idx * 10
+    y_test -= ds_idx * 10
 
     # convert class vectors to binary class matrices
     Y_train = np_utils.to_categorical(y_train, nb_classes)
