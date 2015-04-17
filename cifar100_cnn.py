@@ -19,7 +19,7 @@ from keras.utils import np_utils, generic_utils
 
 batch_size = 128
 nb_classes = 10
-nb_epoch = 5
+nb_epoch = 500
 data_augmentation = True
 all_time_best = []
 
